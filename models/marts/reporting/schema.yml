@@ -1,0 +1,17 @@
+version: 2
+
+models:
+
+  - name: rep_sales_funnel_monthly
+    description: "Monthly aggregated funnel metrics derived from deal funnel events."
+
+    columns:
+      - name: month
+        description: "First day of reporting month."
+        tests:
+          - not_null
+
+      - name: deals_count
+        description: "Number of deals entering the funnel step in the given month."
+        tests:
+          - not_null

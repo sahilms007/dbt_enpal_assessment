@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: int_deal_stage_progression
+    description: "First time a deal enters a specific stage."
+    columns:
+      - name: deal_id
+        tests:
+          - not_null
+
+      - name: stage_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_stages')
+                field: stage_id
+
+      - name: stage_entered_at
+        tests:
+          - not_null
+
+
+  - name: int_sales_calls
+    description: "First completed sales call per deal and type."
+    columns:
+      - name: deal_id
+        tests:
+          - not_null
+
+      - name: activity_type_code
+        tests:
+          - relationships:
+              arguments:
+                to: ref('stg_activity_types')
+                field: activity_type_code
+
+      - name: first_completed_at
+        tests:
+          - not_null

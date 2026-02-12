@@ -1,0 +1,42 @@
+version: 2
+
+models:
+
+  - name: dim_funnel_step
+    description: "Dimension defining funnel steps, ordering, and KPI grouping logic."
+
+    columns:
+      - name: funnel_step_id
+        description: "Surrogate key for funnel step."
+        tests:
+          - not_null
+
+      - name: funnel_step
+        description: "Business label of the funnel step."
+        tests:
+          - not_null
+          - unique
+
+
+  - name: fct_deal_funnel_events
+    description: "Event-level fact table containing one row per deal per funnel transition."
+
+    columns:
+      - name: deal_id
+        description: "Identifier of the deal."
+        tests:
+          - not_null
+
+      - name: funnel_step
+        description: "Foreign key referencing dim_funnel_step."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_funnel_step')
+                field: funnel_step
+
+      - name: event_timestamp
+        description: "Timestamp when the deal entered the funnel step."
+        tests:
+          - not_null

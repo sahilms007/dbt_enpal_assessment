@@ -1,0 +1,79 @@
+version: 2
+
+models:
+
+  - name: stg_activity
+    description: "Cleaned and deduplicated activity records from Pipedrive source."
+
+    columns:
+      - name: activity_id
+        description: "Primary identifier for activity."
+        tests:
+          - not_null
+
+      - name: deal_id
+        description: "Associated deal identifier."
+        tests:
+          - not_null
+
+      - name: activity_type_code
+        description: "Business code representing activity type."
+        tests:
+          - not_null
+
+      - name: activity_due_at
+        description: "Timestamp when activity was due."
+
+
+  - name: stg_activity_types
+    description: "Reference data for activity types."
+
+    columns:
+      - name: activity_type_id
+        description: "Primary key of activity type."
+        tests:
+          - not_null
+          - unique
+
+      - name: activity_type_code
+        description: "Business code for activity type."
+        tests:
+          - not_null
+          - unique
+
+
+  - name: stg_deal_changes
+    description: "Raw deal change history extracted from source system."
+
+    columns:
+      - name: deal_id
+        description: "Deal identifier."
+        tests:
+          - not_null
+
+      - name: changed_at
+        description: "Timestamp when change occurred."
+        tests:
+          - not_null
+
+
+  - name: stg_stages
+    description: "Pipeline stage reference data."
+
+    columns:
+      - name: stage_id
+        description: "Primary key of pipeline stage."
+        tests:
+          - not_null
+          - unique
+
+
+  - name: stg_users
+    description: "CRM users reference data."
+
+    columns:
+      - name: user_id
+        description: "Primary key of CRM user."
+        tests:
+          - not_null
+          - unique

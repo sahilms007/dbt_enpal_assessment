@@ -2,7 +2,46 @@ version: 2
 
 sources:
   - name: postgres_public
-    database: postgres
     schema: public
+    # database: your_database_name   # Uncomment if needed
+
     tables:
+
       - name: activity
+        tests:
+          - not_null:
+              column_name: activity_id
+
+      - name: activity_types
+        tests:
+          - not_null:
+              column_name: id
+          - unique:
+              column_name: id           
+
+      - name: deal_changes   
+        tests:
+          - not_null:
+              column_name: deal_id
+
+
+      - name: fields
+        tests:
+          - not_null:
+              column_name: field_key
+          - unique:
+              column_name: field_key
+
+      - name: users
+        tests:
+          - not_null:
+              column_name: id
+          - unique:
+              column_name: id
+
+      - name: stages
+        tests:
+          - not_null:
+              column_name: stage_id
+          - unique:
+              column_name: stage_id
