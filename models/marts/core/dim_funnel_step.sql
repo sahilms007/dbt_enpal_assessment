@@ -2,7 +2,7 @@
 
 with stage_steps as (
     select
-        stage_id as funnel_step_id,
+        stage_id as funnel_id,
         cast(stage_id as varchar) as funnel_step,
         stage_name as kpi_name,
         'stage' as step_type
@@ -12,7 +12,7 @@ with stage_steps as (
 activity_steps as (
 
     select
-        activity_type_id as funnel_step_id,
+        activity_type_id as funnel_id,
         case 
             when activity_type_code='meeting' then '2.1' 
             when activity_type_code='sc_2' then '3.1' end as funnel_step,
