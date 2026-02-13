@@ -6,7 +6,7 @@ models:
     description: "Dimension defining funnel steps, ordering, and KPI grouping logic."
 
     columns:
-      - name: funnel_step_id
+      - name: funnel_id
         description: "Surrogate key for funnel step."
         tests:
           - not_null
